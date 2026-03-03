@@ -1,0 +1,465 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Aglio - Reclaim iPhone storage in one tap</title>
+  <meta name="description" content="Aglio helps you bulk compress old videos and remove duplicates on iPhone to save storage and cut iCloud costs.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f8fafc;
+      --panel: #ffffff;
+      --ink: #0f172a;
+      --muted: #475569;
+      --line: #dbe4ee;
+      --brand: #ea5b2a;
+      --brand-deep: #c84419;
+      --shadow: 0 14px 34px rgba(11, 22, 42, 0.08);
+      --radius: 18px;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: "Manrope", "Avenir Next", "Segoe UI", sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(1200px 520px at 8% -18%, #fff1ea 0%, transparent 58%),
+        radial-gradient(900px 560px at 95% 0%, #fff8df 0%, transparent 55%),
+        var(--bg);
+      line-height: 1.5;
+    }
+
+    .wrap {
+      width: min(1120px, 92vw);
+      margin: 0 auto;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.45rem 0 .8rem;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: .85rem;
+      font-weight: 800;
+      font-size: 1.24rem;
+      letter-spacing: -0.01em;
+    }
+
+    .brand img {
+      width: 56px;
+      height: 56px;
+      object-fit: contain;
+    }
+
+    .launch-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      border: 1px solid #f6bcaa;
+      background: #fff4ef;
+      color: #94381a;
+      border-radius: 999px;
+      padding: .5rem .95rem;
+      font-size: .8rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: .04em;
+    }
+
+    .launch-pill::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: var(--brand);
+      box-shadow: 0 0 0 5px rgba(234, 91, 42, .16);
+    }
+
+    section { padding: 1.5rem 0 2.5rem; }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1.14fr .86fr;
+      gap: 2.4rem;
+      align-items: center;
+      padding-top: 1.6rem;
+    }
+
+    h1, h2, h3 {
+      margin: 0;
+      font-family: "Sora", "Manrope", sans-serif;
+      letter-spacing: -0.02em;
+    }
+
+    h1 {
+      font-size: clamp(2.2rem, 4.8vw, 4.1rem);
+      line-height: 1.05;
+      max-width: 11.5ch;
+    }
+
+    h2 {
+      font-size: clamp(1.4rem, 2.5vw, 2rem);
+      line-height: 1.1;
+    }
+
+    .sub {
+      margin-top: 1rem;
+      max-width: 43ch;
+      color: var(--muted);
+      font-size: 1.08rem;
+    }
+
+    .usp {
+      margin-top: .9rem;
+      color: #983810;
+      font-weight: 700;
+      font-size: 1.02rem;
+    }
+
+    .cta-row {
+      display: flex;
+      align-items: center;
+      gap: .75rem;
+      margin-top: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .store-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: .7rem 1rem;
+      border-radius: 12px;
+      border: 1px solid var(--line);
+      color: var(--ink);
+      background: #ffffff;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: .95rem;
+    }
+
+    .signup {
+      margin-top: .9rem;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: .55rem;
+      max-width: 520px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: .55rem;
+      background: #ffffff;
+      box-shadow: var(--shadow);
+    }
+
+    .signup input {
+      border: none;
+      border-radius: 10px;
+      background: #f8fafc;
+      color: var(--ink);
+      font: inherit;
+      padding: .85rem .9rem;
+      min-width: 0;
+      width: 100%;
+    }
+
+    .signup button {
+      border: none;
+      border-radius: 10px;
+      font: inherit;
+      font-weight: 800;
+      color: #fff;
+      cursor: pointer;
+      padding: .85rem 1.15rem;
+      background: linear-gradient(120deg, var(--brand), var(--brand-deep));
+      white-space: nowrap;
+      transition: transform .18s ease, filter .18s ease;
+    }
+
+    .signup button:hover { transform: translateY(-1px); filter: brightness(1.04); }
+
+    .success {
+      display: none;
+      margin-top: .65rem;
+      color: #166534;
+      font-weight: 700;
+    }
+
+    .note {
+      margin-top: .55rem;
+      color: #64748b;
+      font-size: .92rem;
+    }
+
+    .iphone-shell {
+      padding: 14px;
+      width: min(360px, 100%);
+      margin-left: auto;
+      border-radius: 44px;
+      background: #171a21;
+      box-shadow: 0 20px 46px rgba(15, 23, 42, .3);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .iphone-shell::before {
+      content: "";
+      position: absolute;
+      left: 50%;
+      top: 8px;
+      transform: translateX(-50%);
+      width: 38%;
+      height: 24px;
+      border-radius: 999px;
+      background: #090b10;
+      z-index: 2;
+    }
+
+    .iphone-shell img {
+      width: 100%;
+      border-radius: 31px;
+      display: block;
+    }
+
+    .two-features {
+      margin-top: 1rem;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1rem;
+    }
+
+    .card {
+      border: 1px solid var(--line);
+      background: var(--panel);
+      border-radius: var(--radius);
+      padding: 1.2rem;
+      box-shadow: var(--shadow);
+    }
+
+    .card h3 {
+      font-size: 1.2rem;
+      margin-bottom: .45rem;
+    }
+
+    .card p { margin: 0; color: var(--muted); }
+
+    .media-sub {
+      margin-top: .6rem;
+      color: var(--muted);
+    }
+
+    .media-strip {
+      margin-top: 1rem;
+      display: grid;
+      grid-auto-flow: column;
+      grid-auto-columns: minmax(180px, 240px);
+      gap: .85rem;
+      overflow-x: auto;
+      padding-bottom: .3rem;
+      scroll-snap-type: x mandatory;
+    }
+
+    .media-card {
+      scroll-snap-align: start;
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      background: #fff;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .media-frame {
+      width: 100%;
+      aspect-ratio: 9 / 19.5;
+      border: 0;
+      display: block;
+      background: #0b1220;
+      object-fit: contain;
+    }
+
+    .media-card p {
+      margin: 0;
+      padding: .6rem .7rem .75rem;
+      font-size: .86rem;
+      color: var(--muted);
+    }
+
+    .trust {
+      margin-top: 1rem;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: .85rem;
+    }
+
+    .trust-item {
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: #fff;
+      padding: 1rem;
+      font-size: .95rem;
+      color: var(--muted);
+    }
+
+    .trust-item b {
+      display: block;
+      color: var(--ink);
+      margin-bottom: .25rem;
+    }
+
+    footer {
+      padding: .8rem 0 2rem;
+      color: #64748b;
+      font-size: .88rem;
+    }
+
+    @media (max-width: 920px) {
+      .hero,
+      .two-features,
+      .trust { grid-template-columns: 1fr; }
+
+      .iphone-shell {
+        margin-left: 0;
+        width: min(340px, 100%);
+      }
+
+      .signup { grid-template-columns: 1fr; }
+      .media-strip { grid-auto-columns: minmax(170px, 220px); }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="brand">
+        <img src="assets/puffer-logo.png" alt="Aglio logo">
+        <span>Aglio</span>
+      </div>
+      <span class="launch-pill">Major update landing soon</span>
+    </header>
+
+    <section class="hero">
+      <div>
+        <h1>Reclaim your iPhone storage in one tap.</h1>
+        <p class="sub">Bulk compress old videos and wipe out duplicates. No cloud, no subscription, just space.</p>
+        <p class="usp">A fully loaded new version of Aglio is almost here.</p>
+
+        <div class="cta-row">
+          <a class="store-link" href="https://apps.apple.com/in/app/aglio-ai-photo-manager/id6758220104" target="_blank" rel="noopener noreferrer">View on the App Store</a>
+        </div>
+
+        <form class="signup" id="waitlist-form" action="https://formspree.io/f/xvzbjeov" method="post">
+          <input type="email" name="email" placeholder="Enter your email for early access" autocomplete="email" required>
+          <button type="submit">Join the waitlist</button>
+        </form>
+        <div class="success" id="success-msg">Thanks - you are on the list.</div>
+        <p class="note">One-time purchase. No weekly fees.</p>
+      </div>
+
+      <div class="iphone-shell">
+        <img src="assets/app-preview.png" alt="Aglio app preview inside iPhone frame">
+      </div>
+    </section>
+
+    <section>
+      <h2>The two ways Aglio saves your storage</h2>
+      <div class="two-features">
+        <article class="card">
+          <h3>Smart Video Compression</h3>
+          <p>The 90-day rule finds heavy videos you are done revisiting and compresses them in bulk, cutting storage by up to 60% with no visible quality drop.</p>
+        </article>
+        <article class="card">
+          <h3>Duplicate Destroyer</h3>
+          <p>Aglio groups similar shots, recommends the best pick, and lets you review and delete the rest in seconds.</p>
+        </article>
+      </div>
+    </section>
+
+    <section>
+      <h2>See Aglio in action</h2>
+      <p class="media-sub">App Store style portrait previews: screenshots first, demo shorts at the end.</p>
+      <div class="media-strip" aria-label="Aglio screenshots and demo videos">
+        <article class="media-card">
+          <img class="media-frame" src="assets/app-preview.png" alt="Aglio home dashboard screenshot">
+          <p>Dashboard overview</p>
+        </article>
+        <article class="media-card">
+          <img class="media-frame" src="assets/savings-cards.png" alt="Savings cards showing reclaimed storage">
+          <p>Storage savings cards</p>
+        </article>
+        <article class="media-card">
+          <img class="media-frame" src="assets/only-old-images.jpeg" alt="Settings showing processing only old images">
+          <p>Only optimize older media</p>
+        </article>
+        <article class="media-card">
+          <picture>
+            <source srcset="assets/compression-progress.heic" type="image/heic">
+            <img class="media-frame" src="assets/compression-progress.PNG" alt="Compression progress screen showing background processing">
+          </picture>
+          <p>Live compression progress</p>
+        </article>
+        <article class="media-card">
+          <img class="media-frame" src="assets/review-dark-mode.jpeg" alt="Duplicate review flow in dark mode">
+          <p>Duplicate review in dark mode</p>
+        </article>
+        <article class="media-card">
+          <iframe class="media-frame" src="https://www.youtube.com/embed/A1Tuwm7im-s" title="Aglio short demo video" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+          <p>Compression workflow short</p>
+        </article>
+      </div>
+    </section>
+
+    <section>
+      <h2>Private, safe, and built for your phone</h2>
+      <div class="trust">
+        <div class="trust-item"><b>100% on-device processing</b>Your media never leaves your iPhone.</div>
+        <div class="trust-item"><b>Safety net built in</b>All cleaned items go to Recently Deleted for 30 days first.</div>
+        <div class="trust-item"><b>Fast and lightweight</b>Two taps, background processing, and no manual cleanup marathon.</div>
+      </div>
+    </section>
+
+    <footer>
+      Aglio - Bulk compress videos older than 90 days and clean duplicates.
+    </footer>
+  </div>
+
+  <script>
+    const form = document.getElementById("waitlist-form");
+    const successMsg = document.getElementById("success-msg");
+
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      const formData = new FormData(form);
+
+      try {
+        const response = await fetch(form.action, {
+          method: "POST",
+          body: formData,
+          headers: { Accept: "application/json" }
+        });
+
+        if (response.ok) {
+          form.reset();
+          successMsg.textContent = "Thanks - you are on the list.";
+          successMsg.style.color = "#166534";
+          successMsg.style.display = "block";
+          return;
+        }
+      } catch (error) {
+      }
+
+      successMsg.textContent = "Could not submit right now. Please try again.";
+      successMsg.style.color = "#991b1b";
+      successMsg.style.display = "block";
+    });
+  </script>
+</body>
+</html>
