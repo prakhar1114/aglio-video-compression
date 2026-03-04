@@ -324,17 +324,98 @@
     }
 
     @media (max-width: 920px) {
+      .wrap { width: min(1120px, 94vw); }
+
+      section { padding: 1.1rem 0 2rem; }
+
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: .7rem;
+        padding: 1rem 0 .5rem;
+      }
+
+      .brand {
+        font-size: 1.12rem;
+        gap: .65rem;
+      }
+
+      .brand img {
+        width: 44px;
+        height: 44px;
+      }
+
+      .launch-pill {
+        font-size: .72rem;
+        padding: .45rem .75rem;
+        letter-spacing: .02em;
+      }
+
       .hero,
       .two-features,
       .trust { grid-template-columns: 1fr; }
 
-      .iphone-shell {
-        margin-left: 0;
-        width: min(340px, 100%);
+      .hero {
+        gap: 1.25rem;
+        padding-top: .9rem;
       }
 
-      .signup { grid-template-columns: 1fr; }
-      .media-strip { grid-auto-columns: minmax(170px, 220px); }
+      h1 {
+        font-size: clamp(2rem, 10vw, 2.9rem);
+        max-width: 10.5ch;
+      }
+
+      .sub {
+        font-size: 1rem;
+      }
+
+      .usp {
+        font-size: .98rem;
+      }
+
+      .cta-row {
+        margin-top: .85rem;
+      }
+
+      .store-link {
+        width: 100%;
+        max-width: 340px;
+        justify-content: center;
+      }
+
+      .iphone-shell {
+        margin: .3rem auto 0;
+        width: min(310px, 88vw);
+      }
+
+      .signup {
+        grid-template-columns: 1fr;
+        max-width: 100%;
+      }
+
+      .media-strip {
+        grid-auto-columns: minmax(164px, 190px);
+        gap: .7rem;
+      }
+
+      .card,
+      .trust-item {
+        padding: 1rem;
+      }
+    }
+
+    @media (max-width: 420px) {
+      h1 {
+        font-size: clamp(1.86rem, 11vw, 2.45rem);
+      }
+
+      .sub {
+        font-size: .96rem;
+      }
+
+      .launch-pill {
+        font-size: .68rem;
+      }
     }
   </style>
 </head>
