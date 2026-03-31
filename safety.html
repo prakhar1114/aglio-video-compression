@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Aglio Safety | Save Space Without Touching Fresh Memories</title>
+  <meta name="description" content="Why Aglio feels safe: on-device cleanup, Recently Deleted recovery, media age filters, and cleanup that still works in flight mode.">
+  <link rel="canonical" href="https://aglioapp.com/safety.html">
+  <link rel="icon" type="image/png" href="assets/aglio-transparent.png">
+  <link rel="apple-touch-icon" href="assets/aglio-transparent.png">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Aglio Safety | Save Space Without Touching Fresh Memories">
+  <meta property="og:description" content="On-device cleanup, Recently Deleted recovery, and age filters that keep fresh memories out of the cleanup path.">
+  <meta property="og:url" content="https://aglioapp.com/safety.html">
+  <meta property="og:image" content="https://aglioapp.com/assets/1.2.7/screenshot_7.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Aglio Safety | Save Space Without Touching Fresh Memories">
+  <meta name="twitter:description" content="On-device cleanup, Recently Deleted recovery, and age filters that keep fresh memories out of the cleanup path.">
+  <meta name="twitter:image" content="https://aglioapp.com/assets/1.2.7/screenshot_7.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;family=Sora:wght@600;700;800&amp;display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f8fafc;
+      --panel: rgba(255, 255, 255, 0.86);
+      --ink: #0f172a;
+      --muted: #475569;
+      --line: #dbe4ee;
+      --brand: #ea5b2a;
+      --shadow: 0 16px 40px rgba(15, 23, 42, 0.08);
+      --radius: 22px;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "Manrope", "Avenir Next", "Segoe UI", sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(900px 480px at 8% -10%, #fff1ea 0%, transparent 58%),
+        linear-gradient(180deg, #f8fafc 0%, #f7fbff 100%);
+      line-height: 1.55;
+    }
+    a { color: inherit; }
+    img { max-width: 100%; display: block; }
+    .wrap { width: min(980px, 92vw); margin: 0 auto; }
+    header, footer { display: flex; justify-content: space-between; align-items: center; gap: 1rem; flex-wrap: wrap; }
+    header { padding: 1.3rem 0 .8rem; }
+    footer { padding: .5rem 0 2rem; color: var(--muted); }
+    .brand { display: flex; align-items: center; gap: .8rem; text-decoration: none; font-weight: 800; font-size: 1.15rem; }
+    .brand img { width: 50px; height: 50px; object-fit: contain; }
+    .pill, .nav-link, .store-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      font-weight: 800;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: var(--panel);
+      padding: .65rem .95rem;
+      box-shadow: var(--shadow);
+    }
+    .store-link { background: linear-gradient(120deg, #ea5b2a, #c84419); color: #fff; border: none; }
+    main { padding-bottom: 2rem; }
+    .hero { padding: 1.2rem 0 1.6rem; }
+    .eyebrow {
+      display: inline-flex;
+      padding: .4rem .72rem;
+      border-radius: 999px;
+      background: #fff6ee;
+      border: 1px solid #ffd7c7;
+      color: #9a3d17;
+      font-size: .78rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: .03em;
+    }
+    h1, h2 { margin: 0; font-family: "Sora", "Manrope", sans-serif; letter-spacing: -0.02em; }
+    h1 { margin-top: .9rem; font-size: clamp(2.1rem, 5vw, 4rem); line-height: 1.03; max-width: 11ch; }
+    h2 { font-size: 1.24rem; line-height: 1.1; }
+    .sub { max-width: 42ch; color: var(--muted); font-size: 1.02rem; margin-top: .9rem; }
+    .grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; margin-top: 1.2rem; }
+    .card {
+      border: 1px solid var(--line);
+      background: var(--panel);
+      border-radius: var(--radius);
+      padding: 1.15rem;
+      box-shadow: var(--shadow);
+    }
+    .card p { margin: .5rem 0 0; color: var(--muted); }
+    .callout {
+      margin-top: 1rem;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.92);
+      border-radius: var(--radius);
+      padding: 1rem 1.15rem;
+      box-shadow: var(--shadow);
+    }
+    .callout strong { display: block; margin-bottom: .25rem; }
+    .actions { display: flex; gap: .8rem; flex-wrap: wrap; margin-top: 1rem; }
+    @media (max-width: 760px) {
+      .grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <a class="brand" href="index.html">
+        <img src="assets/aglio-transparent.png" alt="Aglio logo">
+        <span>Aglio</span>
+      </a>
+      <a class="nav-link" href="anti-overwhelm.html">Why it feels easy</a>
+    </header>
+
+    <main>
+      <section class="hero">
+        <span class="eyebrow">Safety</span>
+        <h1>Save space without touching fresh memories.</h1>
+        <p class="sub">Aglio is designed to help you clean older clutter first, keep control in your hands, and stay private the whole time.</p>
+        <div class="actions">
+          <a class="store-link" href="https://apps.apple.com/in/app/aglio-fast-photo-cleaner/id6758220104" target="_blank" rel="noopener noreferrer">Download Aglio</a>
+          <a class="pill" href="privacy_policy.html">Privacy Policy</a>
+        </div>
+      </section>
+
+      <section class="grid">
+        <article class="card">
+          <h2>On-device by default</h2>
+          <p>Your photos and videos stay on your iPhone. Cleanup logic, compression, and review flows run locally instead of being sent to a cloud service.</p>
+        </article>
+        <article class="card">
+          <h2>Recently Deleted safety net</h2>
+          <p>Removed items still pass through Apple&apos;s normal Recently Deleted flow, so cleanup does not feel like a one-way door.</p>
+        </article>
+        <article class="card">
+          <h2>Fresh memories stay out of the way</h2>
+          <p>Use 30, 60, or 90-day style filtering so you focus on older clutter instead of the moments you just captured.</p>
+        </article>
+        <article class="card">
+          <h2>Runs fine in flight mode</h2>
+          <p>Because the core experience runs on-device, Aglio still works without a network connection, even in flight mode.</p>
+        </article>
+      </section>
+
+      <section class="callout">
+        <strong>Data not collected, memories not rushed.</strong>
+        <span>Aglio is for people who want to save space carefully, not panic-delete their camera roll.</span>
+      </section>
+    </main>
+
+    <footer>
+      <span>Back to the main page.</span>
+      <a class="nav-link" href="index.html">Home</a>
+    </footer>
+  </div>
+</body>
+</html>
