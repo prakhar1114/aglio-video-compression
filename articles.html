@@ -275,7 +275,9 @@
       padding: 1.2rem;
       display: flex;
       flex-direction: column;
-      gap: .9rem;
+      gap: .55rem;
+      min-height: 180px;
+      justify-content: flex-end;
     }
 
     a.guide-card {
@@ -290,37 +292,9 @@
       border-color: #cfdceb;
     }
 
-    .guide-card p {
-      margin: 0;
-      color: var(--muted);
-      font-size: 1rem;
-      line-height: 1.72;
-    }
-
-    .mini-meta {
-      display: flex;
-      gap: .45rem;
-      flex-wrap: wrap;
-    }
-
-    .mini-meta span {
-      display: inline-flex;
-      padding: .28rem .58rem;
-      border-radius: 999px;
-      background: #f5f7fa;
-      border: 1px solid var(--line);
-      color: var(--muted);
-      font-size: .78rem;
-      font-weight: 800;
-    }
-
-    .card-footer {
-      margin-top: auto;
-    }
-
-    .card-footer small {
-      color: var(--muted);
-      font-weight: 700;
+    .guide-card h2 {
+      font-size: clamp(1.15rem, 1.8vw, 1.45rem);
+      line-height: 1.24;
     }
 
     footer {
@@ -384,7 +358,7 @@
         <div class="hero-card">
           <span class="eyebrow">Articles & Guides</span>
           <h1>Clear, useful guides for saving iPhone storage</h1>
-          <p class="sub">This is the reading hub for Aglio. Each article now has its own page, stronger metadata, better source links where possible, and internal navigation through the article dropdown.</p>
+          <p class="sub">Short, useful reads for iPhone storage, clutter, and cleanup decisions.</p>
           <div class="hero-actions">
             <a class="store-link" href="https://apps.apple.com/in/app/aglio-fast-photo-cleaner/id6758220104" target="_blank" rel="noopener noreferrer">Get Aglio</a>
             <a class="card-link" href="why-i-built-aglio.html">Start with the founder article</a>
@@ -396,43 +370,16 @@
         <a class="guide-card" href="migrated-media-iphone-storage-guide.html">
           <span class="eyebrow">iPhone Storage Guide</span>
           <h2>Migrated photos and old chat media can quietly waste iPhone storage</h2>
-          <p>Why imported media, older videos, and years of messaging media can stay heavier than your newly captured iPhone photos, plus practical ways to reclaim space.</p>
-          <div class="mini-meta">
-            <span>HEIF / HEVC</span>
-            <span>WhatsApp media</span>
-            <span>Mac + iPhone tools</span>
-          </div>
-          <div class="card-footer">
-            <small>Includes Apple support references</small>
-          </div>
         </a>
 
         <a class="guide-card" href="google-photos-storage-audit.html">
           <span class="eyebrow">Cloud Storage</span>
           <h2>Before you pay for more storage, audit what you are actually keeping</h2>
-          <p>A practical article distilled from Reddit discussion: duplicates, screenshots, and bloated old videos often matter more than the next Google Photos tier.</p>
-          <div class="mini-meta">
-            <span>Google Photos</span>
-            <span>Library audit</span>
-            <span>Immich</span>
-          </div>
-          <div class="card-footer">
-            <small>Includes official tools and backup references</small>
-          </div>
         </a>
 
         <a class="guide-card" href="why-i-built-aglio.html">
           <span class="eyebrow">Founder Article</span>
           <h2>Why I built Aglio instead of paying cloud rent forever</h2>
-          <p>A frugal-engineer view of the problem: why bulk compression, duplicate grouping, on-device review, and lifetime pricing mattered enough to build a product around.</p>
-          <div class="mini-meta">
-            <span>Founder story</span>
-            <span>Private on-device</span>
-            <span>No subscription</span>
-          </div>
-          <div class="card-footer">
-            <small>Includes product and Apple references</small>
-          </div>
         </a>
       </section>
 

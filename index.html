@@ -21,9 +21,6 @@
   <meta name="twitter:description" content="Bulk compress videos, review duplicates and similar photos fast, and keep cleanup private on-device.">
   <meta name="twitter:image" content="https://aglioapp.com/assets/1.2.7/home-dashboard.png">
   <link rel="preload" as="image" href="assets/1.2.7/home-dashboard.webp">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;family=Sora:wght@600;700;800&amp;display=swap" rel="stylesheet">
   <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -54,38 +51,6 @@
       }
     }
   </script>
-  <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      "mainEntity": [
-        {
-          "@type": "Question",
-          "name": "Does Aglio upload my photos and videos to the cloud?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "No. Aglio is designed to keep cleanup private on-device so your personal media does not need to leave your iPhone for review, compression, and decluttering."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "What kind of storage problems does Aglio help solve?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Aglio helps with bulky old videos, duplicate and similar photos, screenshot clutter, and inefficient image formats that quietly consume iPhone storage."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Is Aglio an alternative to paying for more iCloud or Google Photos storage?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Aglio does not replace backup services, but it can reduce how much junk, duplicate media, and oversized files you keep in your everyday library before you move to a larger paid cloud tier."
-          }
-        }
-      ]
-    }
-  </script>
   <style>
     :root {
       --bg: #f8fafc;
@@ -105,13 +70,13 @@
 
     body {
       margin: 0;
-      font-family: "Manrope", "Avenir Next", "Segoe UI", sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
       color: var(--ink);
       background:
         radial-gradient(1200px 520px at 5% -10%, #fff1ea 0%, transparent 58%),
         radial-gradient(900px 560px at 100% 0%, #fff8df 0%, transparent 55%),
         linear-gradient(180deg, #f8fafc 0%, #f7fbff 100%);
-      line-height: 1.5;
+      line-height: 1.6;
     }
 
     img { max-width: 100%; display: block; }
@@ -232,7 +197,7 @@
 
     h1, h2, h3 {
       margin: 0;
-      font-family: "Sora", "Manrope", sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
       letter-spacing: -0.02em;
     }
 
@@ -252,7 +217,8 @@
       margin-top: .9rem;
       max-width: 34ch;
       color: var(--muted);
-      font-size: 1.04rem;
+      font-size: 1rem;
+      line-height: 1.72;
     }
 
     .cta-row {
@@ -378,7 +344,7 @@
 
     .proof-stat {
       margin-top: .6rem;
-      font-family: "Sora", "Manrope", sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
       font-size: clamp(2.1rem, 5vw, 3.8rem);
       line-height: 1;
     }
@@ -386,7 +352,7 @@
     .proof-stat span {
       font-size: .42em;
       color: var(--muted);
-      font-family: "Manrope", sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
       font-weight: 800;
       margin-left: .3rem;
     }
@@ -500,7 +466,7 @@
 
     .quote {
       margin: .55rem 0 .7rem;
-      font-family: "Sora", "Manrope", sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
       font-size: 1.02rem;
       line-height: 1.25;
     }
@@ -523,15 +489,13 @@
       text-decoration: none;
     }
 
-    .guide-grid,
-    .faq-grid {
+    .guide-grid {
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: .9rem;
     }
 
-    .guide-card,
-    .faq-card {
+    .guide-card {
       border-radius: 18px;
       padding: 1rem;
       background: rgba(255, 255, 255, 0.78);
@@ -539,42 +503,24 @@
       box-shadow: var(--shadow);
     }
 
-    .guide-card p,
-    .faq-card p {
-      margin: .55rem 0 0;
-      color: var(--muted);
+    .guide-card {
+      display: block;
+      text-decoration: none;
+      transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
     }
 
-    .mini-meta {
-      display: flex;
-      gap: .45rem;
-      flex-wrap: wrap;
-      margin-top: .75rem;
+    .guide-card:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-deep);
+      border-color: #cfdceb;
     }
 
-    .mini-meta span {
-      display: inline-flex;
-      padding: .28rem .58rem;
-      border-radius: 999px;
-      background: #f5f7fa;
-      border: 1px solid var(--line);
-      color: var(--muted);
-      font-size: .78rem;
-      font-weight: 800;
+    .guide-card h3 {
+      line-height: 1.28;
     }
 
-    .guide-actions {
-      display: flex;
-      justify-content: space-between;
-      gap: .8rem;
-      align-items: center;
-      margin-top: .95rem;
-      flex-wrap: wrap;
-    }
-
-    .guide-actions small {
-      color: var(--muted);
-      font-weight: 700;
+    .lower-section {
+      padding-top: 1.75rem;
     }
 
     .guide-link {
@@ -591,7 +537,7 @@
     }
 
     .cta-band {
-      padding: 1.15rem 1.2rem;
+      padding: 1rem 1.2rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -643,8 +589,7 @@
         display: grid;
       }
 
-      .guide-grid,
-      .faq-grid {
+      .guide-grid {
         grid-template-columns: 1fr;
       }
 
@@ -789,11 +734,10 @@
         </div>
       </section>
 
-      <section class="reviews">
+      <section class="reviews lower-section">
         <div class="reviews-head">
           <div>
             <h2>From App Store reviews</h2>
-            <p>Short, sharp, and real.</p>
           </div>
           <a class="plain-link" href="https://apps.apple.com/in/app/aglio-fast-photo-cleaner/id6758220104?see-all=reviews&amp;platform=iphone" target="_blank" rel="noopener noreferrer">Read all reviews</a>
         </div>
@@ -802,105 +746,45 @@
           <article class="review-card">
             <div class="stars">★★★★★</div>
             <p class="quote">“Works flawlessly.”</p>
-            <div class="source">Tanmaymun · App Store review</div>
           </article>
           <article class="review-card">
             <div class="stars">★★★★★</div>
             <p class="quote">“Saved 10 GB in 30 mins.”</p>
-            <div class="source">Amit93maurya · App Store review</div>
           </article>
           <article class="review-card">
             <div class="stars">★★★★★</div>
             <p class="quote">“Smart enough to not mix different people.”</p>
-            <div class="source">#FrustratedALot · App Store review</div>
           </article>
-        </div>
-
-        <div class="reviews-ref">
-          Source: <a href="https://apps.apple.com/in/app/aglio-fast-photo-cleaner/id6758220104?see-all=reviews&amp;platform=iphone" target="_blank" rel="noopener noreferrer">Apple App Store reviews</a>
         </div>
       </section>
 
-      <section>
+      <section class="lower-section">
         <div class="screens-head">
           <div>
             <h2>Read before you pay for more storage</h2>
-            <p class="footer-copy">Useful internal guides for duplicates, compression, migrated media, and cloud costs.</p>
           </div>
           <a class="plain-link" href="articles.html">Open article hub</a>
         </div>
 
         <div class="guide-grid">
-          <article class="guide-card">
+          <a class="guide-card" href="migrated-media-iphone-storage-guide.html">
             <h3>Migrated photos and old chat media can quietly waste iPhone storage</h3>
-            <p>Learn why imported JPEG and H.264 files can still take more space than modern iPhone-friendly formats.</p>
-            <div class="mini-meta">
-              <span>HEIF / HEVC</span>
-              <span>Imported media</span>
-            </div>
-            <div class="guide-actions">
-              <small>Apple support sources included</small>
-              <a class="guide-link" href="migrated-media-iphone-storage-guide.html">Read guide</a>
-            </div>
-          </article>
+          </a>
 
-          <article class="guide-card">
+          <a class="guide-card" href="google-photos-storage-audit.html">
             <h3>Before you pay for more storage, audit what you are actually keeping</h3>
-            <p>A practical piece on Google Photos limits, screenshot clutter, duplicate cleanup, and whether cloud rent is even necessary yet.</p>
-            <div class="mini-meta">
-              <span>Google Photos</span>
-              <span>Cloud costs</span>
-            </div>
-            <div class="guide-actions">
-              <small>Official tools and options linked</small>
-              <a class="guide-link" href="google-photos-storage-audit.html">Read guide</a>
-            </div>
-          </article>
+          </a>
 
-          <article class="guide-card">
+          <a class="guide-card" href="why-i-built-aglio.html">
             <h3>Why I built Aglio instead of paying cloud rent forever</h3>
-            <p>A founder article on frugal storage, lifetime pricing, on-device privacy, and why the hard part is reliable review flow, not just compression.</p>
-            <div class="mini-meta">
-              <span>Founder story</span>
-              <span>No subscription</span>
-            </div>
-            <div class="guide-actions">
-              <small>Problem-space references included</small>
-              <a class="guide-link" href="why-i-built-aglio.html">Read guide</a>
-            </div>
-          </article>
+          </a>
         </div>
       </section>
 
-      <section>
-        <div class="screens-head">
-          <div>
-            <h2>Common questions</h2>
-            <p class="footer-copy">Useful answers for search and for real people.</p>
-          </div>
-        </div>
-
-        <div class="faq-grid">
-          <article class="faq-card">
-            <h3>Does Aglio replace iCloud or Google Photos?</h3>
-            <p>No. Aglio helps reduce clutter in your everyday iPhone library before you decide whether you need to pay for a larger backup tier.</p>
-          </article>
-          <article class="faq-card">
-            <h3>Can Aglio help with duplicate and similar photos?</h3>
-            <p>Yes. Aglio is built for fast review of duplicate and similar images so cleanup feels manageable instead of overwhelming.</p>
-          </article>
-          <article class="faq-card">
-            <h3>Is Aglio private?</h3>
-            <p>Yes. The product is designed so your media stays on-device during cleanup, which matters when your gallery contains personal memories.</p>
-          </article>
-        </div>
-      </section>
-
-      <section>
+      <section class="lower-section">
         <div class="cta-band">
           <div>
             <h2>Save space. Keep the memories.</h2>
-            <p class="footer-copy">Use the app when you are ready to clean up. Use the guides when you want the deeper strategy.</p>
           </div>
           <div class="cta-row" style="margin-top: 0;">
             <a class="store-link" href="https://apps.apple.com/in/app/aglio-fast-photo-cleaner/id6758220104" target="_blank" rel="noopener noreferrer">Get Aglio</a>
