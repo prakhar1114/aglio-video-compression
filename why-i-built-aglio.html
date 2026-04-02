@@ -1,0 +1,286 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Why I Built Aglio Instead of Paying Cloud Rent Forever | Aglio</title>
+  <meta name="description" content="A founder-style article on why Aglio was built: faster review, bulk compression, duplicate grouping, no subscriptions, and private on-device cleanup for iPhone.">
+  <meta name="theme-color" content="#f8fafc">
+  <link rel="canonical" href="https://aglioapp.com/why-i-built-aglio.html">
+  <link rel="icon" type="image/png" href="assets/aglio-transparent.png">
+  <link rel="apple-touch-icon" href="assets/aglio-transparent.png">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Aglio">
+  <meta property="og:title" content="Why I Built Aglio Instead of Paying Cloud Rent Forever">
+  <meta property="og:description" content="The engineering problem behind Aglio: making gallery review, compression, and deletion efficient enough that cleaning up actually happens.">
+  <meta property="og:url" content="https://aglioapp.com/why-i-built-aglio.html">
+  <meta property="og:image" content="https://aglioapp.com/assets/1.2.7/home-dashboard.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Why I Built Aglio Instead of Paying Cloud Rent Forever">
+  <meta name="twitter:description" content="A founder view on frugal iPhone storage, lifetime pricing, on-device privacy, and the engineering behind reliable bulk cleanup.">
+  <meta name="twitter:image" content="https://aglioapp.com/assets/1.2.7/home-dashboard.png">
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Why I Built Aglio Instead of Paying Cloud Rent Forever",
+      "description": "A founder view on frugal iPhone storage, lifetime pricing, on-device privacy, and the engineering behind reliable bulk cleanup.",
+      "author": {
+        "@type": "Person",
+        "name": "Prakhar Jain"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Aglio",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://aglioapp.com/assets/aglio-transparent.png"
+        }
+      },
+      "mainEntityOfPage": "https://aglioapp.com/why-i-built-aglio.html"
+    }
+  </script>
+  <style>
+    :root {
+      --bg: #f8fafc;
+      --panel: rgba(255, 255, 255, 0.84);
+      --ink: #0f172a;
+      --muted: #475569;
+      --line: #dbe4ee;
+      --brand: #ea5b2a;
+      --brand-deep: #c84419;
+      --accent: #2563eb;
+      --shadow: 0 16px 40px rgba(15, 23, 42, 0.08);
+      --shadow-deep: 0 24px 56px rgba(15, 23, 42, 0.18);
+      --radius: 22px;
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(1200px 520px at 5% -10%, #fff1ea 0%, transparent 58%),
+        radial-gradient(900px 560px at 100% 0%, #fff8df 0%, transparent 55%),
+        linear-gradient(180deg, #f8fafc 0%, #f7fbff 100%);
+      line-height: 1.65;
+    }
+
+    img { max-width: 100%; display: block; }
+    a { color: inherit; }
+    .wrap { width: min(1180px, 92vw); margin: 0 auto; }
+    header { display: flex; justify-content: space-between; align-items: center; padding: 1.35rem 0 .8rem; gap: 1rem; }
+    .brand { display: flex; align-items: center; gap: .8rem; text-decoration: none; font-weight: 800; font-size: 1.2rem; letter-spacing: -0.01em; }
+    .brand img { width: 52px; height: 52px; object-fit: contain; }
+    .header-links, .footer-links { display: flex; gap: .9rem; flex-wrap: wrap; align-items: center; }
+    .plain-link { color: var(--muted); text-decoration: none; font-weight: 800; }
+    .plain-link:hover, .store-link:hover, .article-menu summary:hover { transform: translateY(-1px); filter: brightness(1.03); }
+    .article-menu { position: relative; }
+    .article-menu summary { list-style: none; cursor: pointer; color: var(--muted); font-weight: 800; display: inline-flex; align-items: center; gap: .4rem; }
+    .article-menu summary::-webkit-details-marker { display: none; }
+    .article-menu-panel { position: absolute; right: 0; top: calc(100% + .7rem); width: min(360px, 82vw); padding: .7rem; border-radius: 18px; border: 1px solid var(--line); background: rgba(255,255,255,.96); backdrop-filter: blur(14px); box-shadow: var(--shadow-deep); z-index: 20; }
+    .article-menu-panel a { display: block; text-decoration: none; padding: .78rem .85rem; border-radius: 14px; color: var(--ink); font-weight: 700; }
+    .article-menu-panel a:hover, .article-menu-panel a.active { background: #fff4ec; color: var(--brand-deep); }
+    .hero { padding: 1.2rem 0 1.5rem; }
+    .hero-card, .article-shell, .rail-card { border: 1px solid var(--line); background: var(--panel); backdrop-filter: blur(12px); box-shadow: var(--shadow); border-radius: var(--radius); }
+    .hero-card { padding: clamp(1.3rem, 3.2vw, 2.4rem); border-radius: 30px; }
+    .eyebrow { display: inline-flex; padding: .38rem .72rem; border-radius: 999px; border: 1px solid #ffd7c7; background: #fff6ee; color: #9a3d17; font-weight: 800; font-size: .74rem; letter-spacing: .04em; text-transform: uppercase; }
+    h1, h2, h3 { margin: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; letter-spacing: -0.03em; }
+    h1 { margin-top: .9rem; font-size: clamp(1.95rem, 3.4vw, 3rem); line-height: 1.04; max-width: 18ch; }
+    h2 { font-size: clamp(1.28rem, 2vw, 1.6rem); line-height: 1.18; margin-top: 2.3rem; }
+    h3 { font-size: 1.04rem; line-height: 1.28; margin-top: 1.5rem; }
+    .sub { margin-top: .95rem; max-width: 56ch; color: var(--muted); font-size: 1.05rem; line-height: 1.75; }
+    .meta { display: flex; flex-wrap: wrap; gap: .65rem; margin-top: 1rem; color: var(--muted); font-size: .9rem; font-weight: 700; }
+    .byline { margin-top: .8rem; color: var(--muted); font-size: .95rem; font-weight: 600; }
+    .content-grid { display: grid; grid-template-columns: minmax(0, 1fr) 300px; gap: 1.3rem; padding-bottom: 2rem; }
+    .article-shell { padding: clamp(1.2rem, 3vw, 2rem); }
+    .article-shell p { margin: 1.1rem 0 0; max-width: 66ch; font-size: 1.06rem; line-height: 1.82; }
+    .article-shell ul, .article-shell ol { margin: 1rem 0 0; padding-left: 1.35rem; }
+    .article-shell li { margin-bottom: .72rem; max-width: 60ch; font-size: 1.02rem; line-height: 1.7; }
+    .callout, .tip-box, .faq, .sources-list, .article-nav-box { margin-top: 1.4rem; padding: 1rem 1.1rem; border-radius: 18px; }
+    .callout { background: #fff6ee; border: 1px solid #ffd7c7; }
+    .tip-box { background: #f0f7ff; border: 1px solid #c7ddff; }
+    .faq, .sources-list, .article-nav-box, .rail-card { background: rgba(255,255,255,.82); border: 1px solid var(--line); }
+    .stat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: .8rem; margin-top: 1.5rem; }
+    .stat { padding: 1rem; border-radius: 18px; background: rgba(255,255,255,.82); border: 1px solid var(--line); }
+    .stat strong { display: block; font-size: 1.1rem; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; }
+    .stat span { color: var(--muted); font-size: .92rem; font-weight: 700; }
+    aside { display: grid; gap: 1rem; align-content: start; }
+    .rail-card { padding: 1rem 1.05rem; position: sticky; top: 1rem; }
+    .rail-card h3 { margin-top: 0; font-size: 1rem; }
+    .rail-card p, .rail-card li { color: var(--muted); font-size: .94rem; line-height: 1.65; }
+    .rail-card ul { margin: .8rem 0 0; padding-left: 1.2rem; }
+    .sources-list a, .rail-card a, .article-nav-box a { color: var(--accent); text-decoration: none; font-weight: 700; }
+    .sources-list a:hover, .rail-card a:hover, .article-nav-box a:hover { text-decoration: underline; }
+    .article-nav-box a { display: block; margin-top: .55rem; }
+    .store-link { display: inline-flex; align-items: center; justify-content: center; text-decoration: none; font-weight: 800; border-radius: 14px; padding: .88rem 1.14rem; transition: transform .18s ease, filter .18s ease; color: #fff; background: linear-gradient(120deg, var(--brand), var(--brand-deep)); box-shadow: 0 16px 30px rgba(234, 91, 42, 0.22); margin-top: .9rem; }
+    footer { padding: .2rem 0 2rem; }
+    .footer { display: flex; justify-content: space-between; gap: 1rem; align-items: center; flex-wrap: wrap; color: var(--muted); font-size: .92rem; }
+    @media (max-width: 980px) { .content-grid { grid-template-columns: 1fr; } .rail-card { position: static; } }
+    @media (max-width: 720px) { .wrap { width: min(1180px, 94vw); } header, .footer { flex-direction: column; align-items: flex-start; } .stat-grid { grid-template-columns: 1fr; } .article-menu-panel { left: 0; right: auto; } }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <a class="brand" href="index.html">
+        <img src="assets/aglio-transparent.webp" alt="Aglio logo" loading="eager" decoding="async">
+        <span>Aglio</span>
+      </a>
+      <div class="header-links">
+        <details class="article-menu">
+          <summary>Browse articles</summary>
+          <div class="article-menu-panel">
+            <a href="articles.html">All articles</a>
+            <a href="migrated-media-iphone-storage-guide.html">Migrated media is wasting iPhone storage</a>
+            <a href="google-photos-storage-audit.html">Audit your library before paying Google Photos</a>
+            <a class="active" href="why-i-built-aglio.html">Why I built Aglio</a>
+          </div>
+        </details>
+        <a class="plain-link" href="safety.html">Safety</a>
+        <a class="plain-link" href="anti-overwhelm.html">Why it feels easy</a>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="hero-card">
+          <span class="eyebrow">Founder Article</span>
+          <h1>Why I built Aglio instead of paying cloud rent forever</h1>
+          <p class="sub">I knew my gallery had the usual problem: screenshots I would never revisit, five versions of the same shot, and large videos that were worth keeping but not worth storing in their original bulk on my phone forever. I wanted a cleanup workflow that was fast, frugal, and private enough that I would actually use it.</p>
+          <div class="meta">
+            <span>Founder story</span>
+            <span>iPhone cleanup</span>
+            <span>Lifetime pricing</span>
+            <span>On-device privacy</span>
+          </div>
+          <div class="byline">By Prakhar Jain · Updated February 2026</div>
+        </div>
+      </section>
+
+      <section class="content-grid">
+        <article class="article-shell">
+          <p>The core frustration was not that cloud storage exists. It was that it becomes the default answer to a problem that is partly avoidable. Most people do not need every screenshot, every almost-identical picture, and every oversized old video available in their main gallery forever. But reviewing that mess manually is slow, and slow workflows simply do not happen.</p>
+
+          <p>So I built Aglio around a simple bar: the app should matter. It should shrink a gallery enough that the cleanup feels worth doing. And it should do that without turning personal media into a cloud AI problem.</p>
+
+          <div class="stat-grid">
+            <div class="stat">
+              <strong>Bulk video compression</strong>
+              <span>One swipe across selected videos</span>
+            </div>
+            <div class="stat">
+              <strong>Duplicate review flow</strong>
+              <span>Grouped similar pictures with a best pick</span>
+            </div>
+            <div class="stat">
+              <strong>Lifetime unlock</strong>
+              <span>Built to avoid cleaner-app subscription fatigue</span>
+            </div>
+          </div>
+
+          <div class="tip-box">
+            <strong>At a glance:</strong>
+            <ul>
+              <li>Aglio was built to make gallery review fast enough that cleanup actually happens.</li>
+              <li>The product is about safe workflow and on-device control, not just raw compression.</li>
+              <li>Lifetime pricing was intentional because the product exists to reduce recurring storage waste.</li>
+            </ul>
+          </div>
+
+          <h2>The problem was not just compression</h2>
+          <p>If compression were the only problem, a command-line tool would be enough. Some commenters on the original post suggested exactly that. But productizing this on iPhone is mostly about everything around compression: free-space management, resumability, user-controlled review, safe selection, and not leaving the phone in a broken or half-finished state.</p>
+
+          <div class="callout">
+            <strong>The real product challenge:</strong> make the user-in-the-loop process fast enough that cleanup becomes a habit instead of a weekend project.
+          </div>
+
+          <h2>What Aglio was designed to do</h2>
+          <h3>Make review and deletion fast</h3>
+          <p>Deletion is where most cleanup efforts die. You open Photos, feel overwhelmed, postpone it, and eventually buy more storage. Aglio breaks work into smaller chunks so you can review duplicates, screenshots, and clutter without needing a giant cleanup session.</p>
+
+          <h3>Reduce cloud costs by reducing junk</h3>
+          <p>The goal is not to convince everyone to stop paying for iCloud or Google Photos. The goal is to make sure you are not paying those subscriptions just to retain obvious waste.</p>
+
+          <h3>Shrink the gallery enough that the app earns its place</h3>
+          <p>That is why the feature set is focused on the categories that actually move the needle: videos, similar photos, format conversion, and obvious junk classification.</p>
+
+          <h2>The feature decisions came from that frugal lens</h2>
+          <ul>
+            <li><strong>Bulk video compression:</strong> select the videos you want, preview a profile, and compress in one go. Old videos are often the biggest win.</li>
+            <li><strong>Similar picture grouping:</strong> metadata alone is not enough, so grouping is based on actual image similarity and then a best image is auto-marked to speed review.</li>
+            <li><strong>Photo compression:</strong> converting PNG and JPEG-heavy sections of a library to more efficient formats can free a surprising amount of space.</li>
+            <li><strong>Auto junk classification:</strong> screenshots and random object photos usually need a faster, lower-thought review path.</li>
+            <li><strong>Face protection:</strong> if you mark loved ones, those photos stay out of risky cleanup flows.</li>
+          </ul>
+
+          <div class="tip-box">
+            <strong>Important nuance:</strong> the value is not just the codec. It is the combination of grouping, triage, preview, continuation, and safe review on-device.
+          </div>
+
+          <h2>What I cared about technically</h2>
+          <p>The app was built around reliability constraints that are easy to underestimate from the outside. If the phone has too little free space, compression cannot just blindly continue. If the app gets backgrounded, it should resume cleanly instead of restarting work. If cleanup depends on user deletion via Photos and Recently Deleted, the workflow needs to respect how iOS actually behaves instead of pretending the app controls everything.</p>
+
+          <p>That is why the implementation focus went into checkpointing, state recovery, active space management, and keeping the app stable during large batch operations. The goal was never to wrap a raw media tool with a pretty button. The goal was to make the whole process trustworthy enough to use on a real personal library.</p>
+
+          <h2>Why the pricing is lifetime</h2>
+          <p>I priced Aglio at a one-time lifetime unlock because the whole point is to feel cheaper and cleaner than endless utility subscriptions. If someone can try the free tier, decide it helps, and then pay once, that feels more aligned with the product than trapping them in another recurring bill.</p>
+
+          <h2>FAQ</h2>
+          <div class="faq">
+            <h3>Why not just use ffmpeg or another free tool?</h3>
+            <p>Those tools are useful, but they do not solve the full iPhone workflow problem by themselves. The hard part is not a single encode command. The hard part is safe, resumable, reviewable cleanup on-device.</p>
+
+            <h3>Is the app private?</h3>
+            <p>Yes. The design principle is that your media does not need to leave your phone for the cleanup workflow to work.</p>
+
+            <h3>Is this only for people who refuse cloud storage?</h3>
+            <p>No. It is also for people who do pay for cloud storage, but want to pay for memories instead of junk.</p>
+          </div>
+
+          <div class="article-nav-box">
+            <strong>Related reading</strong>
+            <a href="migrated-media-iphone-storage-guide.html">Migrated photos and old chat media can quietly waste iPhone storage</a>
+            <a href="google-photos-storage-audit.html">Before you pay for more storage, audit what you are actually keeping</a>
+          </div>
+
+          <a class="store-link" href="https://apps.apple.com/in/app/aglio-fast-photo-cleaner/id6758220104" target="_blank" rel="noopener noreferrer">Download Aglio</a>
+        </article>
+
+        <aside>
+          <div class="rail-card">
+            <h3>Helpful sources</h3>
+            <ul>
+              <li><a href="https://support.apple.com/en-us/116944" target="_blank" rel="noopener noreferrer">Apple: HEIF and HEVC use less storage than JPEG and H.264</a></li>
+              <li><a href="https://support.apple.com/en-in/guide/iphone/iph1978d9c23/ios" target="_blank" rel="noopener noreferrer">Apple: Duplicate photo review in Photos</a></li>
+              <li><a href="https://apps.apple.com/in/app/aglio-fast-photo-cleaner/id6758220104" target="_blank" rel="noopener noreferrer">Aglio on the App Store</a></li>
+            </ul>
+          </div>
+
+          <div class="rail-card">
+            <h3>Quick takeaways</h3>
+            <ul>
+              <li>The hard part is not one encode command. It is reliable, user-controlled cleanup on iPhone.</li>
+              <li>The app is built to reduce friction around review, continuation, and safe deletion.</li>
+              <li>Privacy matters enough that the cleanup flow works without sending media away from the phone.</li>
+            </ul>
+          </div>
+        </aside>
+      </section>
+    </main>
+
+    <footer>
+      <div class="footer">
+        <p>Aglio helps you save iPhone storage fast without deleting memories.</p>
+        <div class="footer-links">
+          <a class="plain-link" href="articles.html">Articles</a>
+          <a class="plain-link" href="safety.html">Safety</a>
+          <a class="plain-link" href="anti-overwhelm.html">Why it feels easy</a>
+          <a class="plain-link" href="privacy_policy.html">Privacy Policy</a>
+        </div>
+      </div>
+    </footer>
+  </div>
+</body>
+</html>

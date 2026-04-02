@@ -1,0 +1,610 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Migrated Photos and WhatsApp Media Can Waste iPhone Storage | Aglio</title>
+  <meta name="description" content="Why imported photos, old videos, and messaging media can waste iPhone storage, and how to reclaim space with HEIF, HEVC, Mac tools, and on-device cleanup.">
+  <meta name="theme-color" content="#f8fafc">
+  <link rel="canonical" href="https://aglioapp.com/migrated-media-iphone-storage-guide.html">
+  <link rel="icon" type="image/png" href="assets/aglio-transparent.png">
+  <link rel="apple-touch-icon" href="assets/aglio-transparent.png">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Aglio">
+  <meta property="og:title" content="Migrated Photos and WhatsApp Media Can Waste iPhone Storage">
+  <meta property="og:description" content="Many imported photos and videos stay in older formats like JPEG and H.264. Here is how to reclaim iPhone storage without deleting memories.">
+  <meta property="og:url" content="https://aglioapp.com/migrated-media-iphone-storage-guide.html">
+  <meta property="og:image" content="https://aglioapp.com/assets/1.2.7/home-dashboard.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Migrated Photos and WhatsApp Media Can Waste iPhone Storage">
+  <meta name="twitter:description" content="How imported media, old videos, and chat media quietly waste storage on iPhone, plus practical ways to fix it.">
+  <meta name="twitter:image" content="https://aglioapp.com/assets/1.2.7/home-dashboard.png">
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Migrated Photos and WhatsApp Media Can Waste iPhone Storage",
+      "description": "How imported media, old videos, and chat media quietly waste storage on iPhone, plus practical ways to fix it.",
+      "author": {
+        "@type": "Person",
+        "name": "Prakhar Jain"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Aglio",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://aglioapp.com/assets/aglio-transparent.png"
+        }
+      },
+      "mainEntityOfPage": "https://aglioapp.com/migrated-media-iphone-storage-guide.html"
+    }
+  </script>
+  <style>
+    :root {
+      --bg: #f8fafc;
+      --panel: rgba(255, 255, 255, 0.84);
+      --ink: #0f172a;
+      --muted: #475569;
+      --line: #dbe4ee;
+      --brand: #ea5b2a;
+      --brand-deep: #c84419;
+      --accent: #2563eb;
+      --shadow: 0 16px 40px rgba(15, 23, 42, 0.08);
+      --shadow-deep: 0 24px 56px rgba(15, 23, 42, 0.18);
+      --radius: 22px;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(1200px 520px at 5% -10%, #fff1ea 0%, transparent 58%),
+        radial-gradient(900px 560px at 100% 0%, #fff8df 0%, transparent 55%),
+        linear-gradient(180deg, #f8fafc 0%, #f7fbff 100%);
+      line-height: 1.65;
+    }
+
+    img { max-width: 100%; display: block; }
+    a { color: inherit; }
+
+    .wrap {
+      width: min(1180px, 92vw);
+      margin: 0 auto;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.35rem 0 .8rem;
+      gap: 1rem;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: .8rem;
+      text-decoration: none;
+      font-weight: 800;
+      font-size: 1.2rem;
+      letter-spacing: -0.01em;
+    }
+
+    .brand img {
+      width: 52px;
+      height: 52px;
+      object-fit: contain;
+    }
+
+    .header-links,
+    .footer-links {
+      display: flex;
+      gap: .9rem;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .plain-link {
+      color: var(--muted);
+      text-decoration: none;
+      font-weight: 800;
+    }
+
+    .plain-link:hover,
+    .store-link:hover,
+    .article-menu summary:hover {
+      transform: translateY(-1px);
+      filter: brightness(1.03);
+    }
+
+    .article-menu {
+      position: relative;
+    }
+
+    .article-menu summary {
+      list-style: none;
+      cursor: pointer;
+      color: var(--muted);
+      font-weight: 800;
+      display: inline-flex;
+      align-items: center;
+      gap: .4rem;
+    }
+
+    .article-menu summary::-webkit-details-marker { display: none; }
+
+    .article-menu-panel {
+      position: absolute;
+      right: 0;
+      top: calc(100% + .7rem);
+      width: min(360px, 82vw);
+      padding: .7rem;
+      border-radius: 18px;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.96);
+      backdrop-filter: blur(14px);
+      box-shadow: var(--shadow-deep);
+      z-index: 20;
+    }
+
+    .article-menu-panel a {
+      display: block;
+      text-decoration: none;
+      padding: .78rem .85rem;
+      border-radius: 14px;
+      color: var(--ink);
+      font-weight: 700;
+    }
+
+    .article-menu-panel a:hover,
+    .article-menu-panel a.active {
+      background: #fff4ec;
+      color: var(--brand-deep);
+    }
+
+    .hero {
+      padding: 1.2rem 0 1.5rem;
+    }
+
+    .hero-card {
+      border: 1px solid var(--line);
+      background: var(--panel);
+      backdrop-filter: blur(12px);
+      box-shadow: var(--shadow);
+      border-radius: 30px;
+      padding: clamp(1.3rem, 3.2vw, 2.4rem);
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      padding: .38rem .72rem;
+      border-radius: 999px;
+      border: 1px solid #ffd7c7;
+      background: #fff6ee;
+      color: #9a3d17;
+      font-weight: 800;
+      font-size: .74rem;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+    }
+
+    h1, h2, h3 {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+      letter-spacing: -0.03em;
+    }
+
+    h1 {
+      margin-top: .9rem;
+      font-size: clamp(1.95rem, 3.4vw, 3rem);
+      line-height: 1.04;
+      max-width: 18ch;
+    }
+
+    h2 {
+      font-size: clamp(1.28rem, 2vw, 1.6rem);
+      line-height: 1.18;
+      margin-top: 2.3rem;
+    }
+
+    h3 {
+      font-size: 1.04rem;
+      line-height: 1.28;
+      margin-top: 1.5rem;
+    }
+
+    .sub {
+      margin-top: .95rem;
+      max-width: 56ch;
+      color: var(--muted);
+      font-size: 1.05rem;
+      line-height: 1.75;
+    }
+
+    .byline {
+      margin-top: .8rem;
+      color: var(--muted);
+      font-size: .95rem;
+      font-weight: 600;
+    }
+
+    .meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .65rem;
+      margin-top: 1rem;
+      color: var(--muted);
+      font-size: .9rem;
+      font-weight: 700;
+    }
+
+    .content-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 300px;
+      gap: 1.3rem;
+      padding-bottom: 2rem;
+    }
+
+    .article-shell,
+    .rail-card {
+      border: 1px solid var(--line);
+      background: var(--panel);
+      backdrop-filter: blur(12px);
+      box-shadow: var(--shadow);
+      border-radius: var(--radius);
+    }
+
+    .article-shell {
+      padding: clamp(1.2rem, 3vw, 2rem);
+    }
+
+    .article-shell p {
+      margin: 1.1rem 0 0;
+      max-width: 66ch;
+      font-size: 1.06rem;
+      line-height: 1.82;
+    }
+
+    .article-shell ul,
+    .article-shell ol {
+      margin: 1rem 0 0;
+      padding-left: 1.35rem;
+    }
+
+    .article-shell li {
+      margin-bottom: .72rem;
+      max-width: 60ch;
+      font-size: 1.02rem;
+      line-height: 1.7;
+    }
+
+    .callout,
+    .tip-box,
+    .faq,
+    .sources-list,
+    .article-nav-box {
+      margin-top: 1.4rem;
+      padding: 1rem 1.1rem;
+      border-radius: 18px;
+    }
+
+    .callout {
+      background: #fff6ee;
+      border: 1px solid #ffd7c7;
+    }
+
+    .tip-box {
+      background: #f0f7ff;
+      border: 1px solid #c7ddff;
+    }
+
+    .faq,
+    .sources-list,
+    .article-nav-box,
+    .rail-card {
+      background: rgba(255, 255, 255, 0.82);
+      border: 1px solid var(--line);
+    }
+
+    .stat-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: .8rem;
+      margin-top: 1.5rem;
+    }
+
+    .stat {
+      padding: 1rem;
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.82);
+      border: 1px solid var(--line);
+    }
+
+    .stat strong {
+      display: block;
+      font-size: 1.1rem;
+      font-family: "Sora", "Manrope", sans-serif;
+    }
+
+    .stat span {
+      color: var(--muted);
+      font-size: .92rem;
+      font-weight: 700;
+    }
+
+    aside {
+      display: grid;
+      gap: 1rem;
+      align-content: start;
+    }
+
+    .rail-card {
+      padding: 1rem 1.05rem;
+      position: sticky;
+      top: 1rem;
+    }
+
+    .rail-card h3 {
+      margin-top: 0;
+      font-size: 1rem;
+    }
+
+    .rail-card p,
+    .rail-card li {
+      color: var(--muted);
+      font-size: .94rem;
+      line-height: 1.65;
+    }
+
+    .rail-card ul {
+      margin: .8rem 0 0;
+      padding-left: 1.2rem;
+    }
+
+    .sources-list a,
+    .rail-card a,
+    .article-nav-box a {
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 700;
+    }
+
+    .sources-list a:hover,
+    .rail-card a:hover,
+    .article-nav-box a:hover {
+      text-decoration: underline;
+    }
+
+    .article-nav-box a {
+      display: block;
+      margin-top: .55rem;
+    }
+
+    .store-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      font-weight: 800;
+      border-radius: 14px;
+      padding: .88rem 1.14rem;
+      transition: transform .18s ease, filter .18s ease;
+      color: #fff;
+      background: linear-gradient(120deg, var(--brand), var(--brand-deep));
+      box-shadow: 0 16px 30px rgba(234, 91, 42, 0.22);
+      margin-top: .9rem;
+    }
+
+    footer {
+      padding: .2rem 0 2rem;
+    }
+
+    .footer {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      align-items: center;
+      flex-wrap: wrap;
+      color: var(--muted);
+      font-size: .92rem;
+    }
+
+    @media (max-width: 980px) {
+      .content-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .rail-card {
+        position: static;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .wrap { width: min(1180px, 94vw); }
+
+      header,
+      .footer {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .stat-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .article-menu-panel {
+        left: 0;
+        right: auto;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <a class="brand" href="index.html">
+        <img src="assets/aglio-transparent.webp" alt="Aglio logo" loading="eager" decoding="async">
+        <span>Aglio</span>
+      </a>
+      <div class="header-links">
+        <details class="article-menu">
+          <summary>Browse articles</summary>
+          <div class="article-menu-panel">
+            <a href="articles.html">All articles</a>
+            <a class="active" href="migrated-media-iphone-storage-guide.html">Migrated media is wasting iPhone storage</a>
+            <a href="google-photos-storage-audit.html">Audit your library before paying Google Photos</a>
+            <a href="why-i-built-aglio.html">Why I built Aglio</a>
+          </div>
+        </details>
+        <a class="plain-link" href="safety.html">Safety</a>
+        <a class="plain-link" href="anti-overwhelm.html">Why it feels easy</a>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="hero-card">
+          <span class="eyebrow">iPhone Storage Guide</span>
+          <h1>Migrated photos and old chat media can quietly waste iPhone storage</h1>
+          <p class="sub">If you moved from Android, restored from older backups, or keep years of messaging media on your phone, a big chunk of your library may still be sitting in older formats even though your iPhone now prefers much more efficient ones.</p>
+          <div class="meta">
+            <span>Article</span>
+            <span>HEIF / HEVC</span>
+            <span>Imported media</span>
+            <span>Storage savings</span>
+          </div>
+          <div class="byline">By Prakhar Jain · Updated February 2026</div>
+        </div>
+      </section>
+
+      <section class="content-grid">
+        <article class="article-shell">
+          <p>Apple's modern photo and video formats, HEIF for images and HEVC for video, are designed to preserve visual quality while using less storage than JPEG and H.264. That is great for everything your iPhone captures today. But your existing library does not automatically become efficient just because it now lives on an iPhone.</p>
+
+          <p>If you migrated from Android, imported folders from a computer, restored years of backups, or saved a lot of media from apps like WhatsApp, a large portion of that library may still be older-format media. It will look normal in Photos, but it can occupy much more space than newly captured iPhone media.</p>
+
+          <div class="stat-grid">
+            <div class="stat">
+              <strong>HEIF / HEVC</strong>
+              <span>Apple's newer space-saving formats</span>
+            </div>
+            <div class="stat">
+              <strong>JPEG / H.264</strong>
+              <span>Older formats common in imports and exports</span>
+            </div>
+            <div class="stat">
+              <strong>Meaningful savings</strong>
+              <span>Most noticeable on 128GB and 256GB devices</span>
+            </div>
+          </div>
+
+          <div class="tip-box">
+            <strong>At a glance:</strong>
+            <ul>
+              <li>Imported media often stays in older formats even after moving to iPhone.</li>
+              <li>That makes old photos, videos, and chat media heavier than recent iPhone captures.</li>
+              <li>The cleanest strategy is usually to keep originals backed up elsewhere and optimize the phone library for daily use.</li>
+            </ul>
+          </div>
+
+          <h2>Why this happens</h2>
+          <p>Apple explicitly says HEIF and HEVC offer better compression than JPEG and H.264 while preserving the same visual quality. That efficiency applies when media is captured or kept in those formats. But imported assets often stay as they are. So the new photo you shoot on your iPhone may be relatively compact, while the old meme, screenshot, exported album, or restored camera roll item beside it may still be heavier than it needs to be.</p>
+
+          <div class="callout">
+            <strong>Practical rule:</strong> if your library grew somewhere else, do not assume it is already optimized for iPhone storage.
+          </div>
+
+          <h2>Where the waste usually hides</h2>
+          <ul>
+            <li>Albums migrated from Android phones that originally shot JPEG and H.264.</li>
+            <li>Media exported from chat apps or social apps and saved back into Photos.</li>
+            <li>Old screenshots and forwarded images that were never cleaned up.</li>
+            <li>Bulk video captures that you only ever watch on a phone screen.</li>
+          </ul>
+
+          <p>Not every file should be converted or compressed. Originals still matter for some people. But if your goal is to keep more memories locally on your phone without immediately upgrading storage, this is one of the highest-leverage places to look.</p>
+
+          <h2>What is worth doing first</h2>
+          <ol>
+            <li><strong>Review duplicates and near-duplicates.</strong> Apple already helps with exact duplicates in Photos, so take those easy wins first.</li>
+            <li><strong>Separate true originals from low-stakes media.</strong> Family footage and meaningful trips deserve more care than old forwarded clips.</li>
+            <li><strong>Compress or re-encode older media in batches.</strong> Do not make this a one-by-one project.</li>
+            <li><strong>Keep backups distinct from phone convenience storage.</strong> Your archive and your everyday library do not have to be the same thing.</li>
+          </ol>
+
+          <div class="tip-box">
+            <strong>Good default thinking:</strong> keep originals somewhere safe, but let your phone library be optimized for day-to-day access.
+          </div>
+
+          <h2>Three realistic ways to reclaim space</h2>
+          <h3>1. Use iPhone and Mac tools you already have</h3>
+          <p>Apple gives you enough to start. Photos can help with duplicates, and Finder Quick Actions on Mac can convert image formats. Shortcuts can also batch-convert selected photos. This route costs nothing, but it gets tedious quickly if your library is large.</p>
+
+          <h3>2. Clean and convert in stages</h3>
+          <p>The most sustainable pattern is usually staged cleanup: first obvious junk, then duplicates, then old videos, then imported photos. This reduces risk and keeps you from accidentally touching media you care about.</p>
+
+          <h3>3. Use a dedicated workflow for bulk review</h3>
+          <p>If the issue is not knowledge but time, a dedicated cleanup workflow matters more than the codec itself. The real bottleneck is usually selecting what is safe to compress or delete without making the process overwhelming.</p>
+
+          <h2>FAQ</h2>
+          <div class="faq">
+            <h3>Will converting everything save space instantly?</h3>
+            <p>Not always. Some workflows create a new copy before you delete the old one, so temporary free space still matters.</p>
+
+            <h3>Is the visual difference noticeable?</h3>
+            <p>For normal phone viewing, many people will not notice much. But the right answer depends on how you use the files later and whether you want archival originals.</p>
+
+            <h3>Should I convert all videos?</h3>
+            <p>No. Keep irreplaceable originals in a proper backup. Treat phone-space optimization and archival storage as separate decisions.</p>
+          </div>
+
+          <div class="article-nav-box">
+            <strong>Next reading</strong>
+            <a href="google-photos-storage-audit.html">Before paying for more Google Photos storage, audit what you are actually keeping</a>
+            <a href="why-i-built-aglio.html">Why I built Aglio instead of paying cloud rent forever</a>
+          </div>
+
+          <a class="store-link" href="https://apps.apple.com/in/app/aglio-fast-photo-cleaner/id6758220104" target="_blank" rel="noopener noreferrer">Try Aglio on iPhone</a>
+        </article>
+
+        <aside>
+          <div class="rail-card">
+            <h3>Helpful sources</h3>
+            <ul>
+              <li><a href="https://support.apple.com/en-us/116944" target="_blank" rel="noopener noreferrer">Apple: Using HEIF or HEVC media on Apple devices</a></li>
+              <li><a href="https://support.apple.com/en-in/guide/iphone/iph1978d9c23/ios" target="_blank" rel="noopener noreferrer">Apple: Merge duplicate photos and videos on iPhone</a></li>
+              <li><a href="https://support.apple.com/en-gb/guide/mac-help/mchl97ff9142/mac" target="_blank" rel="noopener noreferrer">Apple: Convert image formats with Finder Quick Actions on Mac</a></li>
+              <li><a href="https://www.idpack.cloud/how-to-resize-photos-for-idpack-import-using-apple-shortcuts/" target="_blank" rel="noopener noreferrer">Apple Shortcuts example workflow</a></li>
+            </ul>
+          </div>
+
+          <div class="rail-card">
+            <h3>Quick takeaways</h3>
+            <ul>
+              <li>Do not assume imported media is already storage-efficient on iPhone.</li>
+              <li>Duplicates and old videos are usually a better first target than emotional photos.</li>
+              <li>Use phone cleanup and long-term backup as two different workflows.</li>
+            </ul>
+          </div>
+        </aside>
+      </section>
+    </main>
+
+    <footer>
+      <div class="footer">
+        <p>Aglio helps you save iPhone storage fast without deleting memories.</p>
+        <div class="footer-links">
+          <a class="plain-link" href="articles.html">Articles</a>
+          <a class="plain-link" href="safety.html">Safety</a>
+          <a class="plain-link" href="anti-overwhelm.html">Why it feels easy</a>
+          <a class="plain-link" href="privacy_policy.html">Privacy Policy</a>
+        </div>
+      </div>
+    </footer>
+  </div>
+</body>
+</html>

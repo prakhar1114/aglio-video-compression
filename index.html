@@ -3,22 +3,22 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Aglio | Save Space Fast Without Deleting Memories</title>
-  <meta name="description" content="Save space fast without deleting memories. Aglio bulk compresses photos and videos, reviews duplicates quickly, and keeps cleanup private on-device.">
+  <title>Aglio | iPhone Storage Cleaner for Photos, Videos & Duplicates</title>
+  <meta name="description" content="Aglio is a private iPhone storage cleaner that bulk compresses videos, reviews duplicate and similar photos fast, converts images efficiently, and helps you save space without deleting memories.">
   <meta name="theme-color" content="#f8fafc">
   <link rel="canonical" href="https://aglioapp.com/">
   <link rel="icon" type="image/png" href="assets/aglio-transparent.png">
   <link rel="apple-touch-icon" href="assets/aglio-transparent.png">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Aglio">
-  <meta property="og:title" content="Aglio | Save Space Fast Without Deleting Memories">
-  <meta property="og:description" content="Bulk compress photos and videos, review duplicates fast, and keep cleanup private on-device.">
+  <meta property="og:title" content="Aglio | iPhone Storage Cleaner for Photos, Videos & Duplicates">
+  <meta property="og:description" content="Bulk compress videos, review duplicates and similar photos fast, and keep cleanup private on-device.">
   <meta property="og:url" content="https://aglioapp.com/">
   <meta property="og:image" content="https://aglioapp.com/assets/1.2.7/home-dashboard.png">
   <meta property="og:image:alt" content="Aglio home dashboard showing storage savings and cleanup actions on iPhone">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Aglio | Save Space Fast Without Deleting Memories">
-  <meta name="twitter:description" content="Bulk compress photos and videos, review duplicates fast, and keep cleanup private on-device.">
+  <meta name="twitter:title" content="Aglio | iPhone Storage Cleaner for Photos, Videos & Duplicates">
+  <meta name="twitter:description" content="Bulk compress videos, review duplicates and similar photos fast, and keep cleanup private on-device.">
   <meta name="twitter:image" content="https://aglioapp.com/assets/1.2.7/home-dashboard.png">
   <link rel="preload" as="image" href="assets/1.2.7/home-dashboard.webp">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -52,6 +52,38 @@
         "@type": "Person",
         "name": "Prakhar Jain"
       }
+    }
+  </script>
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Does Aglio upload my photos and videos to the cloud?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. Aglio is designed to keep cleanup private on-device so your personal media does not need to leave your iPhone for review, compression, and decluttering."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What kind of storage problems does Aglio help solve?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Aglio helps with bulky old videos, duplicate and similar photos, screenshot clutter, and inefficient image formats that quietly consume iPhone storage."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is Aglio an alternative to paying for more iCloud or Google Photos storage?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Aglio does not replace backup services, but it can reduce how much junk, duplicate media, and oversized files you keep in your everyday library before you move to a larger paid cloud tier."
+          }
+        }
+      ]
     }
   </script>
   <style>
@@ -129,6 +161,50 @@
       font-weight: 800;
     }
 
+    .article-menu {
+      position: relative;
+    }
+
+    .article-menu summary {
+      list-style: none;
+      cursor: pointer;
+      color: var(--muted);
+      font-weight: 800;
+      display: inline-flex;
+      align-items: center;
+      gap: .4rem;
+    }
+
+    .article-menu summary::-webkit-details-marker { display: none; }
+
+    .article-menu-panel {
+      position: absolute;
+      left: 0;
+      top: calc(100% + .65rem);
+      width: min(360px, 82vw);
+      padding: .7rem;
+      border-radius: 18px;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.96);
+      backdrop-filter: blur(14px);
+      box-shadow: var(--shadow-deep);
+      z-index: 20;
+    }
+
+    .article-menu-panel a {
+      display: block;
+      text-decoration: none;
+      padding: .78rem .85rem;
+      border-radius: 14px;
+      color: var(--ink);
+      font-weight: 700;
+    }
+
+    .article-menu-panel a:hover {
+      background: #fff4ec;
+      color: var(--brand-deep);
+    }
+
     main { padding-bottom: 2.2rem; }
 
     section { padding: 1.1rem 0 2rem; }
@@ -204,7 +280,9 @@
     }
 
     .store-link:hover,
-    .plain-link:hover {
+    .plain-link:hover,
+    .article-menu summary:hover,
+    .guide-link:hover {
       transform: translateY(-1px);
       filter: brightness(1.03);
     }
@@ -445,6 +523,73 @@
       text-decoration: none;
     }
 
+    .guide-grid,
+    .faq-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: .9rem;
+    }
+
+    .guide-card,
+    .faq-card {
+      border-radius: 18px;
+      padding: 1rem;
+      background: rgba(255, 255, 255, 0.78);
+      border: 1px solid rgba(219, 228, 238, 0.9);
+      box-shadow: var(--shadow);
+    }
+
+    .guide-card p,
+    .faq-card p {
+      margin: .55rem 0 0;
+      color: var(--muted);
+    }
+
+    .mini-meta {
+      display: flex;
+      gap: .45rem;
+      flex-wrap: wrap;
+      margin-top: .75rem;
+    }
+
+    .mini-meta span {
+      display: inline-flex;
+      padding: .28rem .58rem;
+      border-radius: 999px;
+      background: #f5f7fa;
+      border: 1px solid var(--line);
+      color: var(--muted);
+      font-size: .78rem;
+      font-weight: 800;
+    }
+
+    .guide-actions {
+      display: flex;
+      justify-content: space-between;
+      gap: .8rem;
+      align-items: center;
+      margin-top: .95rem;
+      flex-wrap: wrap;
+    }
+
+    .guide-actions small {
+      color: var(--muted);
+      font-weight: 700;
+    }
+
+    .guide-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      font-weight: 800;
+      border-radius: 14px;
+      padding: .72rem .95rem;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.88);
+      transition: transform .18s ease, filter .18s ease;
+    }
+
     .cta-band {
       padding: 1.15rem 1.2rem;
       display: flex;
@@ -498,6 +643,11 @@
         display: grid;
       }
 
+      .guide-grid,
+      .faq-grid {
+        grid-template-columns: 1fr;
+      }
+
       .footer {
         flex-direction: column;
         align-items: flex-start;
@@ -510,10 +660,14 @@
       }
 
       .store-link,
-      .store-link { width: 100%; }
+      .guide-link { width: 100%; }
 
       .screen-rail {
         grid-auto-columns: minmax(176px, 206px);
+      }
+
+      .article-menu-panel {
+        width: min(300px, 90vw);
       }
     }
   </style>
@@ -526,6 +680,15 @@
         <span>Aglio</span>
       </a>
       <div class="header-links">
+        <details class="article-menu">
+          <summary>Articles</summary>
+          <div class="article-menu-panel">
+            <a href="articles.html">All articles</a>
+            <a href="migrated-media-iphone-storage-guide.html">Migrated media is wasting iPhone storage</a>
+            <a href="google-photos-storage-audit.html">Audit your library before paying Google Photos</a>
+            <a href="why-i-built-aglio.html">Why I built Aglio</a>
+          </div>
+        </details>
         <a class="plain-link" href="safety.html">Safety</a>
         <a class="plain-link" href="anti-overwhelm.html">Why it feels easy</a>
       </div>
@@ -535,14 +698,23 @@
       <section class="hero">
         <div>
           <span class="eyebrow">Private photo cleaner for iPhone</span>
-          <h1>Save space fast without deleting memories.</h1>
-          <p class="sub">Bulk compress photos and videos, review duplicates fast, and keep fresh memories out of the cleanup path.</p>
+          <h1>iPhone storage cleaner that saves space without deleting memories.</h1>
+          <p class="sub">Bulk compress iPhone videos, review duplicate and similar photos fast, and keep fresh memories out of the cleanup path.</p>
 
           <div class="cta-row">
             <a class="store-link" href="https://apps.apple.com/in/app/aglio-fast-photo-cleaner/id6758220104" target="_blank" rel="noopener noreferrer">Download on the App Store</a>
           </div>
 
           <div class="inline-links" style="margin-top: .85rem;">
+            <details class="article-menu">
+              <summary>Articles</summary>
+              <div class="article-menu-panel">
+                <a href="articles.html">All articles</a>
+                <a href="migrated-media-iphone-storage-guide.html">Migrated media is wasting iPhone storage</a>
+                <a href="google-photos-storage-audit.html">Audit your library before paying Google Photos</a>
+                <a href="why-i-built-aglio.html">Why I built Aglio</a>
+              </div>
+            </details>
             <a class="plain-link" href="safety.html">Safety</a>
             <a class="plain-link" href="anti-overwhelm.html">Why it feels easy</a>
           </div>
@@ -650,13 +822,89 @@
       </section>
 
       <section>
+        <div class="screens-head">
+          <div>
+            <h2>Read before you pay for more storage</h2>
+            <p class="footer-copy">Useful internal guides for duplicates, compression, migrated media, and cloud costs.</p>
+          </div>
+          <a class="plain-link" href="articles.html">Open article hub</a>
+        </div>
+
+        <div class="guide-grid">
+          <article class="guide-card">
+            <h3>Migrated photos and old chat media can quietly waste iPhone storage</h3>
+            <p>Learn why imported JPEG and H.264 files can still take more space than modern iPhone-friendly formats.</p>
+            <div class="mini-meta">
+              <span>HEIF / HEVC</span>
+              <span>Imported media</span>
+            </div>
+            <div class="guide-actions">
+              <small>Apple support sources included</small>
+              <a class="guide-link" href="migrated-media-iphone-storage-guide.html">Read guide</a>
+            </div>
+          </article>
+
+          <article class="guide-card">
+            <h3>Before you pay for more storage, audit what you are actually keeping</h3>
+            <p>A practical piece on Google Photos limits, screenshot clutter, duplicate cleanup, and whether cloud rent is even necessary yet.</p>
+            <div class="mini-meta">
+              <span>Google Photos</span>
+              <span>Cloud costs</span>
+            </div>
+            <div class="guide-actions">
+              <small>Official tools and options linked</small>
+              <a class="guide-link" href="google-photos-storage-audit.html">Read guide</a>
+            </div>
+          </article>
+
+          <article class="guide-card">
+            <h3>Why I built Aglio instead of paying cloud rent forever</h3>
+            <p>A founder article on frugal storage, lifetime pricing, on-device privacy, and why the hard part is reliable review flow, not just compression.</p>
+            <div class="mini-meta">
+              <span>Founder story</span>
+              <span>No subscription</span>
+            </div>
+            <div class="guide-actions">
+              <small>Problem-space references included</small>
+              <a class="guide-link" href="why-i-built-aglio.html">Read guide</a>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section>
+        <div class="screens-head">
+          <div>
+            <h2>Common questions</h2>
+            <p class="footer-copy">Useful answers for search and for real people.</p>
+          </div>
+        </div>
+
+        <div class="faq-grid">
+          <article class="faq-card">
+            <h3>Does Aglio replace iCloud or Google Photos?</h3>
+            <p>No. Aglio helps reduce clutter in your everyday iPhone library before you decide whether you need to pay for a larger backup tier.</p>
+          </article>
+          <article class="faq-card">
+            <h3>Can Aglio help with duplicate and similar photos?</h3>
+            <p>Yes. Aglio is built for fast review of duplicate and similar images so cleanup feels manageable instead of overwhelming.</p>
+          </article>
+          <article class="faq-card">
+            <h3>Is Aglio private?</h3>
+            <p>Yes. The product is designed so your media stays on-device during cleanup, which matters when your gallery contains personal memories.</p>
+          </article>
+        </div>
+      </section>
+
+      <section>
         <div class="cta-band">
           <div>
             <h2>Save space. Keep the memories.</h2>
-            <p class="footer-copy">Everything else lives on the pages below.</p>
+            <p class="footer-copy">Use the app when you are ready to clean up. Use the guides when you want the deeper strategy.</p>
           </div>
           <div class="cta-row" style="margin-top: 0;">
             <a class="store-link" href="https://apps.apple.com/in/app/aglio-fast-photo-cleaner/id6758220104" target="_blank" rel="noopener noreferrer">Get Aglio</a>
+            <a class="guide-link" href="articles.html">Browse guides</a>
           </div>
         </div>
       </section>
@@ -666,6 +914,7 @@
       <div class="footer">
         <div class="footer-copy">Aglio helps you save iPhone storage fast without deleting memories.</div>
         <div class="footer-links">
+          <a class="plain-link" href="articles.html">Articles</a>
           <a class="plain-link" href="safety.html">Safety</a>
           <a class="plain-link" href="anti-overwhelm.html">Why it feels easy</a>
           <a class="plain-link" href="privacy_policy.html">Privacy Policy</a>
